@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
@@ -5,7 +6,9 @@ import userRoute from "./route/user.route.js";
 
 const app = express();
 dotenv.config();
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
+
 const PORT = process.env.PORT || 3000;
 const URI = process.env.MONGODB_URI;
 
@@ -15,7 +18,7 @@ try {
   console.log(error);
 }
 
-app.use("/user", userRoute)
+app.use("/user", userRoute);
 
 app.listen(PORT, () => {
   console.log(`app is running on: http://localhost:${PORT}`);
